@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جمهورية السفر للسفريات والسياحة وخدمات الحج والعمرة</title>
+    <!-- مكتبة الأيقونات FontAwesome لدعم أيقونات الهاتف والواتساب داخل الإعلانات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a2332;
+            --accent-gold: #f3b544;
+            --light-bg: #f8f9fa;
+            --text-dark: #222222;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            padding-bottom: 70px;
+            scroll-behavior: smooth;
+        }
+
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+
+        /* القائمة الجانبية */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            z-index: 1000;
+            justify-content: flex-start;
+        }
+
+        .sidebar {
+            background-color: var(--primary-color);
+            width: 300px;
+            height: 100%;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-logo-img {
+            max-width: 120px;
+            max-height: 80px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-logo {
+            font-weight: bold;
+            color: var(--accent-gold);
+            font-size: 16px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            display: block;
+            cursor: pointer;
+        }
+
+        .sidebar-menu li a:hover {
+            color: var(--accent-gold);
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 15px;
+            width: 100%;
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+        .dropdown-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding-right: 15px;
+            margin-top: 8px;
+            border-radius: 6px;
+        }
+
+        .dropdown-container li {
+            border-bottom: none;
+            padding: 8px 0;
+        }
+
+        .dropdown-container li a {
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .dropdown-container li a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* الهيدر الرئيسي */
+        header {
+            background: linear-gradient(rgba(26,35,50,0.92), rgba(26,35,50,0.92)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad') center/cover no-repeat;
+            color: white;
+            padding: 20px 20px 40px 20px;
+            text-align: center;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 8px 12px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .brand-logo-container {
+            margin: 10px auto 15px auto;
+        }
+
+        .main-brand-logo {
+            max-width: 180px;
+            max-height: 100px;
+            object-fit: contain;
+        }
+
+        .hero-text {
+            max-width: 750px;
+            margin: 10px auto 0 auto;
+        }
+
+        .hero-text h1 {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .hero-text p {
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* الأقسام العامة */
+        .section-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* شريط الحركة الإعلاني */
+        .agency-ticker {
+            background-color: #111;
+            color: var(--accent-gold);
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            border-top: 2px solid var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .ticker-track {
+            display: inline-block;
+            animation: marquee 35s linear infinite;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            margin: 0 30px;
+            padding: 5px 15px;
+            border: 1px dashed var(--accent-gold);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* تصميم الكروت والعروض */
+        .ads-slider-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 10px 0;
+        }
+
+        .ads-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+        }
+
+        .ad-card {
+            min-width: calc(50% - 10px);
+            flex: 0 0 calc(50% - 10px);
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eaeaea;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .ad-card {
+                min-width: 100%;
+                flex: 0 0 100%;
+            }
+        }
+
+        .ad-header {
+            height: 170px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .ad-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(26,35,50,0.6), transparent);
+            z-index: 1;
+        }
+
+        .company-badge {
+            position: relative;
+            z-index: 2;
+            background-color: var(--accent-gold);
+            color: #1a2332;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .quick-contact-buttons {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 8px;
+        }
+
+        .quick-contact-buttons a {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .call-btn {
+            background-color: #1a2332;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .whatsapp-btn {
+            background-color: #25d366;
+        }
+
+        .quick-contact-buttons a:hover {
+            transform: scale(1.1);
+        }
+
+        .ad-body {
+            padding: 18px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ad-title {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .ad-description {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+        }
+
+        .details-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-color);
+            padding: 8px 0;
+            width: 100%;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .details-btn:hover {
+            background-color: var(--accent-gold);
+            color: #1a2332;
+        }
+
+        /* شبكة عروض صفحة العروض المتكاملة */
+        .offers-grid-page {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        /* مؤشرات التنقل للسلايدر */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--accent-gold);
+            width: 22px;
+            border-radius: 5px;
+        }
+
+        /* شبكة الخدمات */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #eaeaea;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .service-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: var(--primary-color);
+        }
+
+        .service-content p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .service-footer {
+            padding: 0 15px 15px 15px;
+        }
+
+        .service-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-color);
+            padding: 7px 0;
+            width: 100%;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .service-btn:hover {
+            background-color: var(--accent-gold);
+            color: #111;
+        }
+
+        /* شريط شركات الطيران المتحرك أفقيًا */
+        .airlines-section {
+            padding: 40px 0;
+            background-color: #ffffff;
+            overflow: hidden;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+            margin: 30px 0;
+        }
+
+        .airlines-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .airlines-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scrollLogos 35s linear infinite;
+        }
+
+        .airlines-slider:hover .airlines-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+
+        .airline-logo-box {
+            background: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 150px;
+            height: 70px;
+            box-sizing: border-box;
+        }
+
+        .airline-logo-box img {
+            max-width: 120px;
+            max-height: 45px;
+            object-fit: contain;
+        }
+
+        /* الإحصائيات */
+        .stats-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 25px auto 0 auto;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 20px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-box h2 {
+            color: var(--accent-gold);
+            font-size: 26px;
+            margin: 0 0 5px 0;
+        }
+
+        .stat-box p {
+            margin: 0;
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        /* صندوق المحتوى */
+        .content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: right;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* الفوتر وأيقونات التواصل */
+        .wp-block-social-links {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0 0;
+            flex-wrap: wrap;
+        }
+
+        .wp-block-social-links li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.08);
+            color: var(--accent-gold);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            border: 1px solid rgba(243, 181, 68, 0.3);
+            transition: 0.3s;
+        }
+
+        .wp-block-social-links li a:hover {
+            background-color: var(--accent-gold);
+            color: #111;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            background-color: #25d366;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            z-index: 950;
+            transition: 0.3s;
+        }
+
+        .floating-whatsapp:hover {
+            background-color: #20ba5a;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .floating-whatsapp img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        footer {
+            background-color: #111822;
+            color: white;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .footer-col p, .footer-col ul {
+            font-size: 12px;
+            color: #bbb;
+            line-height: 1.7;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+            font-size: 11px;
+            color: #888;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 900;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #666;
+            font-size: 11px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            flex-grow: 1;
+        }
+
+        .nav-item.active {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- أيقونة الواتساب العائمة -->
+    <a href="https://wa.me/967776301075" target="_blank" class="floating-whatsapp" title="تواصل عبر الواتساب">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <!-- القائمة الجانبية -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMenu()">
+        <div class="sidebar" onclick="event.stopPropagation()">
+            <div>
+                <button class="close-btn" onclick="toggleMenu()">×</button>
+                <div class="sidebar-logo-container">
+                    <img src="Logo2.png" alt="شعار جمهورية السفر" class="sidebar-logo-img">
+                    <div class="sidebar-logo">جمهورية السفر</div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a onclick="switchPage('home'); toggleMenu();">الرئيسية</a></li>
+                    <li>
+                        <button class="dropdown-btn" onclick="toggleDropdown(event)">
+                            <span>خدماتنا</span>
+                            <span>▼</span>
+                        </button>
+                        <ul class="dropdown-container">
+                            <li><a onclick="switchPage('services'); toggleMenu();">جميع الخدمات</a></li>
+                            <li><a href="https://wa.me/967776301075?text=استفسار عن الموافقات الأمنية" target="_blank">الموافقات الأمنية</a></li>
+                            <li><a href="https://wa.me/967776301075?text=استفسار عن الحجوزات الفندقية" target="_blank">الحجز الفندقي</a></li>
+                            <li><a href="https://wa.me/967776301075?text=استفسار عن تذاكر الطيران" target="_blank">تذاكر الطيران</a></li>
+                            <li><a href="https://wa.me/967776301075?text=استفسار عن برامج الحج والعمرة" target="_blank">الحج والعمرة</a></li>
+                        </ul>
+                    </li>
+                    <li><a onclick="switchPage('offers'); toggleMenu();">العروض والباقات</a></li>
+                    <li><a onclick="switchPage('about'); toggleMenu();">من نحن</a></li>
+                    <li><a onclick="switchPage('contact'); toggleMenu();">تواصل معنا</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-top">
+            <button class="menu-toggle-btn" onclick="toggleMenu()">☰</button>
+        </div>
+        
+        <div class="brand-logo-container">
+            <img src="Logo2.png" alt="جمهورية السفر - Republic Travel" class="main-brand-logo">
+        </div>
+
+        <div class="hero-text">
+            <h1>اكتشف العالم مع جمهورية السفر للسفريات والسياحة وخدمات الحج والعمرة</h1>
+            <p>من التخطيط للحجز وحتى العودة، نحن معك في كل خطوة لنضمن لك رحلة استثنائية.</p>
+        </div>
+    </header>
+
+    <!-- الرئيسية -->
+    <div id="home" class="page-section active">
+        <div class="section-container">
+            
+            <!-- شريط الإعلانات المتحرك -->
+            <div class="agency-ticker">
+                <div class="ticker-track">
+                    <span class="ticker-item">🌟 عروض الحج والعمرة الميسرة</span>
+                    <span class="ticker-item">✈️ عروض تذاكر الطيران العالمية والمحلية</span>
+                    <span class="ticker-item">🌴 عروض رحلات سقطرى السياحية البكر</span>
+                    <span class="ticker-item">🏥 عروض الرحلات العلاجية إلى الهند والأردن</span>
+                </div>
+            </div>
+
+            <!-- صندوق نظام حجز تذاكر الطيران الذكي -->
+            <div class="search-flight-box" style="text-align: center;direction: rtl;padding: 30px 15px;background: #1a242f;color: #ffffff;border-radius: 12px;margin: 20px 0;box-shadow: 0 4px 15px rgba(0,0,0,0.2);border: 2px solid #b19343">
+                <h3 style="color: #b19343;margin-top: 0;margin-bottom: 10px;font-size: 1.4rem">✈️ نظام حجز تذاكر الطيران الذكي</h3>
+                <p style="margin-bottom: 25px;font-size: 1rem;color: #dddddd;line-height: 1.6">ابحث وقارن بين مئات الخطوط الجوية العالمية والمحلية للحصول على أرخص الأسعار لرحلتك القادمة</p>
+                <a href="https://aviasales.com" target="_blank" rel="noopener" style="display: inline-block;padding: 14px 40px;background: #b19343;color: #ffffff;text-decoration: none;border-radius: 6px;font-weight: bold;font-size: 1.1rem;width: 85%;max-width: 300px;box-shadow: 0 3px 6px rgba(0,0,0,0.1)">ابدأ البحث والحجز الآن</a>
+            </div>
+
+            <!-- صندوق خدمة الاستعلام عن التأشيرات -->
+            <div class="mofa-link-section" style="text-align: center;direction: rtl;padding: 25px 15px;background: #1a242f;color: #ffffff;border-radius: 12px;margin: 20px 0;box-shadow: 0 4px 10px rgba(0,0,0,0.15);border: 2px solid #b19343">
+                <h3 style="color: #b19343;margin-top: 0;margin-bottom: 10px;font-size: 1.3rem">🔍 خدمة الاستعلام عن التأشيرات</h3>
+                <p style="margin-bottom: 20px;font-size: 0.95rem;color: #dddddd;line-height: 1.5">استعلم عن حالة معاملتك وموافقات التأشيرات مباشرة عبر منصة التأشيرات لوزارة الخارجية السعودية</p>
+                <a href="https://visa.mofa.gov.sa/visaperson/getapplicantdata" target="_blank" rel="noopener" style="display: inline-block;padding: 12px 35px;background: #b19343;color: #ffffff;text-decoration: none;border-radius: 6px;font-weight: bold;font-size: 1rem;width: 85%;max-width: 280px">اضغط هنا للاستعلام الآن</a>
+            </div>
+
+            <!-- قسم الإعلانات والعروض المتحركة تلقائياً (Slider) -->
+            <div class="section-title">أحدث العروض الرسمية المعتمدة لخدمتكم</div>
+            <div class="section-subtitle">تقدم وكالة جمهورية السفر للسفريات والسياحة أفضل العروض بأعلى معايير الاحترافية</div>
+
+            <div class="ads-slider-container">
+                <div class="ads-track" id="adsTrack">
+                    <!-- إعلان وكالة فلاي دبي -->
+                    <div class="ad-card">
+                        <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05');">
+                            <div class="company-badge">جمهورية السفر</div>
+                            <div class="quick-contact-buttons">
+                                <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                                <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عروض حجز طيران فلاي دبي" class="whatsapp-btn" target="_blank" title="مراسلة واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ad-body">
+                            <div>
+                                <h3 class="ad-title">نحن وكيل معتمد - فلاي دبي</h3>
+                                <p class="ad-description">نحن وكيل معتمد - فلاي دبي أتصل بنا لمعرفة أفضل العروض وأسعار التذاكر التنافسية.</p>
+                            </div>
+                            <a href="https://wa.me/967776301075?text=أرغب بمعرفة تفاصيل عروض فلاي دبي" target="_blank" class="details-btn">عرض التفاصيل</a>
+                        </div>
+                    </div>
+
+                    <!-- إعلان خدمات الحج والعمرة -->
+                    <div class="ad-card">
+                        <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa');">
+                            <div class="company-badge">جمهورية السفر</div>
+                            <div class="quick-contact-buttons">
+                                <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                                <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن برامج الحج والعمرة" class="whatsapp-btn" target="_blank" title="مراسلة واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ad-body">
+                            <div>
+                                <h3 class="ad-title">برامج الحج والعمرة 2026</h3>
+                                <p class="ad-description">احجز مقعدك الآن في برامجنا المميزة والميسرة لأداء العمرة والحج بأفضل الخدمات الفندقية.</p>
+                            </div>
+                            <a href="https://wa.me/967776301075?text=أرغب بمعرفة تفاصيل برامج الحج والعمرة" target="_blank" class="details-btn">عرض التفاصيل</a>
+                        </div>
+                    </div>
+
+                    <!-- إعلان رحلات سقطرى -->
+                    <div class="ad-card">
+                        <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+                            <div class="company-badge">جمهورية السفر</div>
+                            <div class="quick-contact-buttons">
+                                <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                                <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن رحلات سقطرى" class="whatsapp-btn" target="_blank" title="مراسلة واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ad-body">
+                            <div>
+                                <h3 class="ad-title">رحلات جزيرة سقطرى السياحية</h3>
+                                <p class="ad-description">استمتع بسحر الطبيعة البكر في أرخبيل سقطرى مع باقات سياحية متكاملة ومخصصة.</p>
+                            </div>
+                            <a href="https://wa.me/967776301075?text=أرغب بمعرفة تفاصيل رحلات سقطرى" target="_blank" class="details-btn">عرض التفاصيل</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- نقاط التبديل التلقائي (Dots) -->
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+
+            <!-- إحصائيات -->
+            <div class="stats-section" style="border-radius: 12px; margin-top: 30px;">
+                <h2 style="color:white; margin-bottom:5px; font-size:20px;">صنعنا السعادة، لننال الثقة</h2>
+                <p style="color:#aaa; font-size:12px; margin-bottom:20px;">أرقام نحققها، بأهداف مستمرة النمو.</p>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h2>6,383+</h2>
+                        <p>تذكرة طيران</p>
+                    </div>
+                    <div class="stat-box">
+                        <h2>3,928+</h2>
+                        <p>تأشيرة عمرة</p>
+                    </div>
+                    <div class="stat-box">
+                        <h2>3,732+</h2>
+                        <p>تخليص معاملة</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شركاؤنا (شريط شعارات شركات الطيران المحدث) -->
+            <div class="airlines-section" style="margin-top: 40px; border-radius: 12px;">
+                <div class="section-title" style="margin-bottom: 5px;">شركاؤنا</div>
+                <div class="section-subtitle" style="margin-bottom: 25px;">نعتز بشراكتنا مع أفضل خطوط الطيران العالمية والمحلية لخدمتكم</div>
+                <div class="airlines-slider">
+                    <div class="airlines-track">
+                        <div class="airline-logo-box"><img src="Turkish Airlines.png" alt="Turkish Airlines"></div>
+                        <div class="airline-logo-box"><img src="Badr Airlines.png" alt="Badr Airlines"></div>
+                        <div class="airline-logo-box"><img src="Flyadeal.png" alt="Flyadeal"></div>
+                        <div class="airline-logo-box"><img src="Flynas.png" alt="Flynas"></div>
+                        <div class="airline-logo-box"><img src="Emirates Airline.png" alt="Emirates Airline"></div>
+                        <div class="airline-logo-box"><img src="IndiGo.png" alt="IndiGo"></div>
+                        <div class="airline-logo-box"><img src="SalamAir.png" alt="SalamAir"></div>
+                        <div class="airline-logo-box"><img src="Jazeera Airways.png" alt="Jazeera Airways"></div>
+                        <div class="airline-logo-box"><img src="Oman Air.png" alt="Oman Air"></div>
+                        <div class="airline-logo-box"><img src="Fly Aden.png" alt="Fly Aden"></div>
+                        <div class="airline-logo-box"><img src="Yemenia Airways.png" alt="Yemenia Airways"></div>
+                        <div class="airline-logo-box"><img src="Pegasus Airlines.png" alt="Pegasus Airlines"></div>
+
+                        <!-- تكرار للحريك السلس -->
+                        <div class="airline-logo-box"><img src="Turkish Airlines.png" alt="Turkish Airlines"></div>
+                        <div class="airline-logo-box"><img src="Badr Airlines.png" alt="Badr Airlines"></div>
+                        <div class="airline-logo-box"><img src="Flyadeal.png" alt="Flyadeal"></div>
+                        <div class="airline-logo-box"><img src="Flynas.png" alt="Flynas"></div>
+                        <div class="airline-logo-box"><img src="Emirates Airline.png" alt="Emirates Airline"></div>
+                        <div class="airline-logo-box"><img src="IndiGo.png" alt="IndiGo"></div>
+                        <div class="airline-logo-box"><img src="SalamAir.png" alt="SalamAir"></div>
+                        <div class="airline-logo-box"><img src="Jazeera Airways.png" alt="Jazeera Airways"></div>
+                        <div class="airline-logo-box"><img src="Oman Air.png" alt="Oman Air"></div>
+                        <div class="airline-logo-box"><img src="Fly Aden.png" alt="Fly Aden"></div>
+                        <div class="airline-logo-box"><img src="Yemenia Airways.png" alt="Yemenia Airways"></div>
+                        <div class="airline-logo-box"><img src="Pegasus Airlines.png" alt="Pegasus Airlines"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- خدماتنا -->
+    <div id="services" class="page-section">
+        <div class="section-container">
+            <div class="section-title">جميع خدماتنا الاحترافية</div>
+            <div class="section-subtitle">اختر الخدمة التي تناسب احتياجاتك وتواصل معنا فوراً لتنفيذها</div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="موافقات أمنية" class="service-img">
+                    <div class="service-content">
+                        <h3>الموافقات الأمنية</h3>
+                        <p>إنجاز التراخيص والموافقات الأمنية اللازمة للسفر والتنقل بكل يسر وسرعة.</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://wa.me/967776301075?text=أرغب في الاستفسار عن خدمة الموافقات الأمنية" target="_blank" class="service-btn">طلب الخدمة</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="حجز فندقي" class="service-img">
+                    <div class="service-content">
+                        <h3>حجز فندقي</h3>
+                        <p>حجوزات فندقية عالمية ومحلية بأفضل الأسعار وأرقى المستويات.</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://wa.me/967776301075?text=أرغب في الاستفسار عن حجوزات الفنادق" target="_blank" class="service-btn">طلب الخدمة</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05" alt="تذاكر طيران" class="service-img">
+                    <div class="service-content">
+                        <h3>تذاكر طيران</h3>
+                        <p>حجز وإصدار تذاكر السفر على مختلف خطوط الطيران المحلية والدولية.</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://wa.me/967776301075?text=أرغب في حجز تذكرة طيران" target="_blank" class="service-btn">طلب الخدمة</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa" alt="الحج والعمرة" class="service-img">
+                    <div class="service-content">
+                        <h3>خدمات الحج والعمرة</h3>
+                        <p>برامج متكاملة وميسرة لأداء مناسك العمرة والحج بأفضل الخدمات المعتمدة.</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://wa.me/967776301075?text=أرغب في الاستفسار عن برامج الحج والعمرة" target="_blank" class="service-btn">طلب الخدمة</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة العروض (المتكاملة) -->
+    <div id="offers" class="page-section">
+        <div class="section-container">
+            <div class="section-title">العروض والباقات الحصرية لعام 2026</div>
+            <div class="section-subtitle">تقدم وكالة جمهورية السفر للسفريات والسياحة أفضل العروض بأعلى معايير الاحترافية والموثوقية</div>
+            
+            <div class="offers-grid-page">
+                
+                <!-- 1. عروض للحج والعمرة -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عروض برامج الحج والعمرة" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">عروض الحج والعمرة الميسرة</h3>
+                            <p class="ad-description">احجز مقعدك الآن في برامج الحج والعمرة المعتمدة لعام 2026. تتضمن الباقات السكن الفندقي الراقي بالقرب من الحرمين الشريفين، النقل المريح، والتأشيرات الرسمية مع إشراف إداري متكامل.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بحجز أو الاستفسار عن تفاصيل عروض الحج والعمرة" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+                <!-- 2. عروض تذاكر السفر -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عروض تذاكر السفر" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">عروض تذاكر السفر التنافسية</h3>
+                            <p class="ad-description">نقدم أرخص أسعار تذاكر الطيران على كافة خطوط الطيران المحلية والدولية (فلاي دبي، الخطوط اليمنية، السعودية، التركية، وغيرها). احجز رحلتك القادمة بأفضل الأسعار وأقصى مرونة في المواعيد.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بالاستفسار عن عروض تذاكر السفر وأسعارها" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+                <!-- 3. عروض رحلات لسقطرى -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن رحلات سقطرى" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">رحلات جزيرة سقطرى السياحية</h3>
+                            <p class="ad-description">اكتشف جوهرة المحيط الهندي وأغرب بيئة طبيعية في العالم مع باقات سقطرى الاستثنائية. تشمل الرحلة التذاكر، المرشد السياحي المحلي، التخييم والمخيمات البيئية، ووسائل النقل الجبلية لاستكشاف الشواطئ العذراء وغابات شجرة دم الأخوين.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بحجز رحلة إلى سقطرى ومعرفة التفاصيل" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+                <!-- 4. عرض الرحلات العلاجية الى الهند -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عرض الرحلات العلاجية إلى الهند" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">عرض الرحلات العلاجية إلى الهند</h3>
+                            <p class="ad-description">رعاية صحية متكاملة في أرقى المستشفيات والمراكز الطبية المعتمدة في الهند. تتضمن الخدمات تنسيق المواعيد الطبية، استقبال المطار، توفير المترجمين، حجز الفنادق، وتسهيل إجراءات السفر والتأشيرات.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بالتنسيق للرحلة العلاجية إلى الهند ومعرفة التفاصيل" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+                <!-- 5. عرض الرحلات العلاجية الى الأردن -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عرض الرحلات العلاجية إلى الأردن" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">عرض الرحلات العلاجية إلى الأردن</h3>
+                            <p class="ad-description">خدمات طبية وعلاجية متكاملة في أفضل المستشفيات الأردنية المتطورة. نشمل بالتنسيق حجز المواعيد مع الاستشاريين، حجوزات الإقامة، وتأمين تسهيلات السفر والمتابعة المستمرة طوال فترة العلاج.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بالتنسيق للرحلة العلاجية إلى الأردن ومعرفة التفاصيل" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+                <!-- 6. عرض الحصول على الموافقة الأمنية لمصر -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1539650116574-8efeb43e2750');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عرض الحصول على الموافقة الأمنية لمصر" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">عرض الحصول على الموافقة الأمنية لمصر</h3>
+                            <p class="ad-description">خدمة استخراج وتخليص الموافقات الأمنية لجمهورية مصر العربية بسرعة ودقة عالية. نوفر المتابعة الكاملة لملفك لضمان إتمام الإجراءات الرسمية بأيسر السبل وبدون عناء.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بالتقديم على الموافقة الأمنية لمصر ومعرفة المتطلبات" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+                <!-- 7. عرض الحصول على الموافقة الأمنية للأردن -->
+                <div class="ad-card" style="min-width: 100%;">
+                    <div class="ad-header" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada');">
+                        <div class="company-badge">جمهورية السفر</div>
+                        <div class="quick-contact-buttons">
+                            <a href="tel:+967776301075" class="call-btn" title="اتصال هاتفي"><i class="fas fa-phone"></i></a>
+                            <a href="https://wa.me/967776301075?text=مرحباً، أرغب بالاستفسار عن عرض الحصول على الموافقة الأمنية للأردن" class="whatsapp-btn" target="_blank" title="مراسلة واتساب"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="ad-body">
+                        <div>
+                            <h3 class="ad-title">عرض الحصول على الموافقة الأمنية للأردن</h3>
+                            <p class="ad-description">تنسيق وإصدار الموافقات الأمنية الرسمية لدخول المملكة الأردنية الهاشمية (سياحة، علاج، أو زيارة). فريقنا المختص يتولى كافة الإجراءات التنظيمية لضمان سرعة صدور الموافقة.</p>
+                        </div>
+                        <a href="https://wa.me/967776301075?text=أرغب بالتقديم على الموافقة الأمنية للأردن ومعرفة المتطلبات" target="_blank" class="details-btn">احجز العرض الآن عبر واتساب</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- من نحن -->
+    <div id="about" class="page-section">
+        <div class="section-container">
+            <div class="section-title">من نحن</div>
+            <div class="section-subtitle">تعرف على وكالة جمهورية السفر للسفريات والسياحة وخدمات الحج والعمرة</div>
+            <div class="content-box">
+                <p>نحن <strong>جمهورية السفر</strong>، وكالتكم الرائدة والمرخصة في تقديم خدمات السفر والسياحة، حجوزات الطيران والفنادق، وتنظيم رحلات الحج والعمرة وتخليص المعاملات بكفاءة عالية واحترافية غير مسبوقة.</p>
+                <p>نسعى دائماً لتوفير راحة عملائنا وتقديم أفضل الخدمات والتسهيلات لجعل كل رحلة تجربة فريدة لا تُنسى.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- تواصل معنا -->
+    <div id="contact" class="page-section">
+        <div class="section-container">
+            <div class="section-title">تواصل معنا</div>
+            <div class="section-subtitle">نحن بانتظار تواصلكم للرد على كافة استفساراتكم</div>
+            <div class="content-box" style="text-align: center;">
+                <p>📍 <strong>العنوان:</strong> صنعاء - شارع الزبيري</p>
+                <p>📞 <strong>رقم الهاتف / واتساب:</strong> 776301075</p>
+                <p>✉️ <strong>البريد الإلكتروني:</strong> jumhuriatravel@gmail.com</p>
+                <br>
+                <a href="https://wa.me/967776301075" target="_blank" style="background: #25d366; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">مراسلة عبر واتساب مباشرة 💬</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>جمهورية السفر</h4>
+                <p>وكالتكم الرائدة في خدمات السفر والسياحة، الحج والعمرة، وتخليص المعاملات.</p>
+            </div>
+            <div class="footer-col">
+                <h4>روابط هامة</h4>
+                <ul>
+                    <li><a onclick="switchPage('home')">الرئيسية</a></li>
+                    <li><a onclick="switchPage('services')">خدماتنا</a></li>
+                    <li><a onclick="switchPage('offers')">العروض والباقات</a></li>
+                    <li><a onclick="switchPage('about')">من نحن</a></li>
+                    <li><a onclick="switchPage('contact')">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>تواصل معنا</h4>
+                <p>📍 صنعاء - شارع الزبيري</p>
+                <p>📞 776301075</p>
+                <p>✉️ jumhuriatravel@gmail.com</p>
+                
+                <ul class="wp-block-social-links">
+                    <li><a href="https://wa.me/967776301075" target="_blank" title="WhatsApp">💬</a></li>
+                    <li><a href="https://www.facebook.com/share/1QXpkm7cgB/" target="_blank" title="Facebook">f</a></li>
+                    <li><a href="https://www.instagram.com/republictravel3?igsh=aDJjZjlxMzd6OG5k" target="_blank" title="Instagram">📷</a></li>
+                    <li><a href="mailto:jumhuriatravel@gmail.com" title="Email">✉️</a></li>
+                    <li><a href="tel:00967776301075" title="Call">📞</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة لـ جمهورية السفر &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- الشريط السفلي -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchPage('home')" id="nav-home">
+            <span>🏠</span>
+            <span>الرئيسية</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('services')" id="nav-services">
+            <span>📖</span>
+            <span>خدماتنا</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('offers')" id="nav-offers">
+            <span>🎁</span>
+            <span>العروض</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('about')" id="nav-about">
+            <span>❓</span>
+            <span>من نحن</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('contact')" id="nav-contact">
+            <span>📞</span>
+            <span>تواصل</span>
+        </button>
+    </nav>
+
+    <!-- الجافاسكريبت -->
+    <script>
+        function toggleMenu() {
+            const overlay = document.getElementById('sidebarOverlay');
+            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function toggleDropdown(event) {
+            const dropdown = event.currentTarget.nextElementSibling;
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+            } else {
+                dropdown.style.display = 'block';
+            }
+        }
+
+        function switchPage(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            const targetSection = document.getElementById(pageId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* نظام الحركة التلقائية للإعلانات والسلايدرات (Auto Slider) */
+        function setupSlider(trackId, dotsId, intervalTime = 3500) {
+            let currentSlide = 0;
+            const track = document.getElementById(trackId);
+            if (!track) return;
+            const cards = track.children;
+            const dotsContainer = document.getElementById(dotsId);
+            let autoPlayInterval;
+
+            if (cards.length === 0) return;
+
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < cards.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => {
+                        goToSlide(i);
+                        resetAutoPlay();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                if (currentSlide >= cards.length) {
+                    currentSlide = 0;
+                } else if (currentSlide < 0) {
+                    currentSlide = cards.length - 1;
+                }
+
+                const cardWidth = cards[0].offsetWidth + 20;
+                track.style.transform = `translateX(${currentSlide * cardWidth}px)`;
+
+                if (dotsContainer) {
+                    const dots = dotsContainer.children;
+                    for (let i = 0; i < dots.length; i++) {
+                        dots[i].classList.toggle('active', i === currentSlide);
+                    }
+                }
+            }
+
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(nextSlide, intervalTime);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+
+            function resetAutoPlay() {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+
+            startAutoPlay();
+
+            const sliderContainer = track.parentElement;
+            sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+            sliderContainer.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setupSlider('adsTrack', 'sliderDots', 4000);
+        });
+    </script>
+</body>
+</html>
